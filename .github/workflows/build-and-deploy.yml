@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test
   workflow_dispatch:
 
 env:
@@ -56,11 +57,22 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set environment variables
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "CONTAINER_NAME=nextjs-prod" >> $GITHUB_ENV
+            echo "PORT=3000" >> $GITHUB_ENV
+            echo "ENV_NAME=production" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/test" ]]; then
+            echo "CONTAINER_NAME=nextjs-test" >> $GITHUB_ENV
+            echo "PORT=3001" >> $GITHUB_ENV
+            echo "ENV_NAME=test" >> $GITHUB_ENV
+          fi
 
       - name: Deploy to SSH server
         uses: appleboy/ssh-action@master
@@ -71,19 +83,24 @@ jobs:
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
             set -e
+            CONTAINER_NAME="${{ env.CONTAINER_NAME }}"
+            PORT="${{ env.PORT }}"
+            ENV_NAME="${{ env.ENV_NAME }}"
+
+            echo "Deploying to $ENV_NAME..."
             echo "Pulling latest image..."
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
             echo "Stopping existing container..."
-            docker stop nextjs-app || true
-            docker rm nextjs-app || true
+            docker stop $CONTAINER_NAME || true
+            docker rm $CONTAINER_NAME || true
 
-            echo "Starting new container..."
+            echo "Starting new container on port $PORT..."
             docker run -d \
-              --name nextjs-app \
+              --name $CONTAINER_NAME \
               --restart unless-stopped \
-              -p 3000:3000 \
+              -p $PORT:3000 \
               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
-            echo "Deployment complete!"
+            echo "Deployment to $ENV_NAME complete!"
             docker ps
