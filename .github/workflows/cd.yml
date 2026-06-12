@@ -1,8 +1,8 @@
-name: Nextjs CD
+name: Next.js CD
 
 on:
   workflow_run:
-    workflows: ["Nextjs CI"]
+    workflows: ["Next.js CI"]
     types: [completed]
 
 jobs:
