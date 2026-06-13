@@ -60,18 +60,24 @@ export default function CreatePostModal({ isOpen, onClose, onSuccess, recentEmai
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-lg transform overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/90 p-8 text-left shadow-2xl backdrop-blur-xl transition-all duration-300">
+      <div 
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-create-title"
+        className="relative w-full max-w-lg transform overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/90 p-8 text-left shadow-2xl backdrop-blur-xl transition-all duration-300"
+      >
         
         {/* Close button */}
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all"
+          aria-label="Close modal"
+          className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all"
         >
           ✕
         </button>
 
         <div className="mb-6">
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+          <h3 id="modal-create-title" className="text-2xl font-bold text-zinc-100">
             Create Draft Post
           </h3>
           <p className="mt-1 text-sm text-zinc-400">

@@ -104,7 +104,7 @@ export default async function PostDetailsPage({ params }: PostDetailsPageProps) 
 
             {/* Post Content */}
             <div className="prose prose-invert max-w-none text-zinc-300 leading-relaxed space-y-4 text-base whitespace-pre-wrap">
-              {post.content || <em className="text-zinc-650">No content provided for this post.</em>}
+              {post.content || <em className="text-zinc-500">No content provided for this post.</em>}
             </div>
 
             {/* Actions Panel */}
@@ -114,7 +114,7 @@ export default async function PostDetailsPage({ params }: PostDetailsPageProps) 
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-900 bg-zinc-950/20 py-8 text-center text-xs text-zinc-550">
+      <footer className="border-t border-zinc-900 bg-zinc-950/20 py-8 text-center text-xs text-zinc-500">
         <p>© 2026 NestPost Hub. Full-Stack CI/CD Sandbox environment.</p>
       </footer>
     </div>

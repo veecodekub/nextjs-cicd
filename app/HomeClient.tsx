@@ -167,7 +167,7 @@ export default function HomeClient({
               NP
             </span>
             <div>
-              <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+              <h1 className="text-lg font-bold tracking-tight text-zinc-100">
                 NestPost Hub
               </h1>
               <p className="text-[10px] text-zinc-500 font-mono leading-none">basePath: /nextjs-cicd</p>
@@ -214,7 +214,7 @@ export default function HomeClient({
         {/* Hero Section */}
         <div className="text-center md:text-left mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-900 pb-8">
           <div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl bg-gradient-to-r from-zinc-50 to-zinc-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Developer Feed
             </h2>
             <p className="mt-2 text-base text-zinc-400 max-w-xl">
@@ -233,6 +233,7 @@ export default function HomeClient({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search posts by title or content"
               placeholder="Search posts by title or body content..."
               className="w-full rounded-xl border border-zinc-850 bg-zinc-900/20 py-2.5 pl-10 pr-4 text-sm text-zinc-200 placeholder-zinc-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:bg-zinc-900/40 outline-none transition-all shadow-inner"
             />
@@ -334,7 +335,7 @@ export default function HomeClient({
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-900 bg-zinc-950/20 py-8 text-center text-xs text-zinc-550">
+      <footer className="border-t border-zinc-900 bg-zinc-950/20 py-8 text-center text-xs text-zinc-500">
         <p>© 2026 NestPost Hub. Full-Stack CI/CD Sandbox environment.</p>
       </footer>
 

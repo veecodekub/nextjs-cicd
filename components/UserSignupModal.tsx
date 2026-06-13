@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { api } from '../lib/api';
+import React, { useState } from "react";
+import { api } from "../lib/api";
 
 interface UserSignupModalProps {
   isOpen: boolean;
@@ -9,9 +9,13 @@ interface UserSignupModalProps {
   onSuccess: (email: string, name: string) => void;
 }
 
-export default function UserSignupModal({ isOpen, onClose, onSuccess }: UserSignupModalProps) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+export default function UserSignupModal({
+  isOpen,
+  onClose,
+  onSuccess,
+}: UserSignupModalProps) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +24,7 @@ export default function UserSignupModal({ isOpen, onClose, onSuccess }: UserSign
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
-      setError('Email is required');
+      setError("Email is required");
       return;
     }
     setError(null);
@@ -28,12 +32,15 @@ export default function UserSignupModal({ isOpen, onClose, onSuccess }: UserSign
 
     try {
       const user = await api.signupUser({ name: name || undefined, email });
-      onSuccess(user.email, user.name || '');
-      setName('');
-      setEmail('');
+      onSuccess(user.email, user.name || "");
+      setName("");
+      setEmail("");
       onClose();
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.";
       setError(msg);
     } finally {
       setLoading(false);
@@ -43,24 +50,32 @@ export default function UserSignupModal({ isOpen, onClose, onSuccess }: UserSign
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-300"
         onClick={onClose}
       />
 
       {/* Modal Container */}
-      <div className="relative w-full max-w-md transform overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/90 p-8 text-left shadow-2xl backdrop-blur-xl transition-all duration-300">
-        
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-signup-title"
+        className="relative w-full max-w-md transform overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/90 p-8 text-left shadow-2xl backdrop-blur-xl transition-all duration-300"
+      >
         {/* Close button */}
-        <button 
+        <button
           onClick={onClose}
-          className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all"
+          aria-label="Close modal"
+          className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all"
         >
           ✕
         </button>
 
         <div className="mb-6">
-          <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+          <h3
+            id="modal-signup-title"
+            className="text-2xl font-bold text-zinc-100"
+          >
             Register New User
           </h3>
           <p className="mt-1 text-sm text-zinc-400">
@@ -76,7 +91,10 @@ export default function UserSignupModal({ isOpen, onClose, onSuccess }: UserSign
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">
+            <label
+              htmlFor="name"
+              className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5"
+            >
               Full Name
             </label>
             <input
@@ -90,7 +108,10 @@ export default function UserSignupModal({ isOpen, onClose, onSuccess }: UserSign
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5">
+            <label
+              htmlFor="email"
+              className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1.5"
+            >
               Email Address <span className="text-indigo-400">*</span>
             </label>
             <input
@@ -119,14 +140,29 @@ export default function UserSignupModal({ isOpen, onClose, onSuccess }: UserSign
             >
               {loading ? (
                 <>
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  <svg
+                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
                   </svg>
                   Registering...
                 </>
               ) : (
-                'Register'
+                "Register"
               )}
             </button>
           </div>

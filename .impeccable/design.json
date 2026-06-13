@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-13T18:07:00Z",
+  "title": "Design System: NestPost Hub",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Electric Indigo",
+        "canonical": "oklch(50% 0.25 285)",
+        "tonalRamp": [
+          "oklch(20% 0.10 285)",
+          "oklch(30% 0.15 285)",
+          "oklch(40% 0.20 285)",
+          "oklch(50% 0.25 285)",
+          "oklch(60% 0.22 285)",
+          "oklch(70% 0.18 285)",
+          "oklch(80% 0.12 285)",
+          "oklch(90% 0.06 285)"
+        ]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Sanctuary Black",
+        "canonical": "oklch(10% 0.005 240)",
+        "tonalRamp": [
+          "oklch(10% 0.005 240)",
+          "oklch(15% 0.005 240)",
+          "oklch(20% 0.005 240)",
+          "oklch(35% 0.005 240)",
+          "oklch(50% 0.005 240)",
+          "oklch(70% 0.005 240)",
+          "oklch(85% 0.005 240)",
+          "oklch(95% 0.005 240)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Sans",
+        "purpose": "Main hero titles only."
+      },
+      "body": {
+        "displayName": "Body Sans",
+        "purpose": "Standard paragraphs and descriptions."
+      },
+      "label": {
+        "displayName": "Label Monospace",
+        "purpose": "Monospaced codes, badges, and user metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "modal-shadow",
+        "value": "0 10px 25px rgba(0, 0, 0, 0.5)",
+        "purpose": "Ambient dark backdrop shadow to lift dialogs and modals."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Standard easing transition for scaling and hover effects."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Standard action button for primary actions (e.g. Publish Post, New Draft).",
+      "html": "<button class=\"ds-btn-primary\">GET STARTED</button>",
+      "css": ".ds-btn-primary { background: #4f46e5; color: #f4f4f5; padding: 8px 16px; font-size: 14px; font-weight: 600; border: none; border-radius: 8px; transition: background-color 0.2s, transform 0.1s; cursor: pointer; font-family: system-ui, sans-serif; } .ds-btn-primary:hover { background: #4338ca; } .ds-btn-primary:active { transform: scale(0.95); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ghost/secondary action button for alternative paths (e.g. Sign Up User, Cancel).",
+      "html": "<button class=\"ds-btn-secondary\">SIGN UP USER</button>",
+      "css": ".ds-btn-secondary { background: rgba(24, 24, 27, 0.3); color: #a1a1aa; padding: 8px 16px; font-size: 12px; font-weight: 600; border: 1px solid #27272a; border-radius: 8px; transition: background-color 0.2s, color 0.2s, border-color 0.2s; cursor: pointer; font-family: system-ui, sans-serif; } .ds-btn-secondary:hover { background: rgba(24, 24, 27, 0.8); color: #f4f4f5; border-color: #52525b; }"
+    },
+    {
+      "name": "Feed Post Card",
+      "kind": "card",
+      "refersTo": "ds-card",
+      "description": "The card component used to render each post in the developer feed.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-header\"><span class=\"ds-badge\">Published</span></div><h4 class=\"ds-card-title\">Test Post Title</h4><p class=\"ds-card-desc\">This is an excerpt of a post to show off spacing, readable line height, and color contrast.</p><div class=\"ds-card-footer\"><div class=\"ds-author\"><div class=\"ds-author-avatar\">A</div><div class=\"ds-author-info\"><div class=\"ds-author-name\">Author Name</div><div class=\"ds-author-email\">author@example.com</div></div></div><a href=\"#\" class=\"ds-card-link\">View Post &rarr;</a></div></div>",
+      "css": ".ds-card { background: rgba(24, 24, 27, 0.4); border: 1px solid #27272a; border-radius: 12px; padding: 24px; transition: background-color 0.3s, border-color 0.3s, transform 0.3s; font-family: system-ui, sans-serif; width: 100%; box-sizing: border-box; } .ds-card:hover { background: rgba(24, 24, 27, 0.6); border-color: #3f3f46; transform: translateY(-4px); } .ds-card-header { margin-bottom: 12px; } .ds-badge { background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 9999px; padding: 2px 10px; font-size: 12px; font-weight: 500; } .ds-card-title { color: #f4f4f5; font-size: 18px; font-weight: 700; margin: 0 0 8px 0; } .ds-card-desc { color: #a1a1aa; font-size: 14px; line-height: 1.6; margin: 0 0 16px 0; } .ds-card-footer { border-top: 1px solid #27272a; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; } .ds-author { display: flex; align-items: center; gap: 8px; } .ds-author-avatar { width: 28px; height: 28px; border-radius: 9999px; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; } .ds-author-name { color: #d4d4d8; font-size: 11px; font-weight: 600; line-height: 1; } .ds-author-email { color: #52525b; font-size: 10px; margin-top: 2px; } .ds-card-link { color: #818cf8; text-decoration: none; font-size: 12px; font-weight: 600; transition: color 0.2s; } .ds-card-link:hover { color: #a5b4fc; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Developer Sanctuary",
+    "overview": "NestPost Hub utilizes a dark, focused user interface designed to mirror a modern code editor environment. The system leans heavily on deep zinc shades, crisp 1px borders, and translucent layered surfaces to establish a clean hierarchical layout. High-fidelity indigo and violet accents serve to highlight interactive targets and key metadata without overstimulating the user's attention.",
+    "keyCharacteristics": [
+      "Deep dark backdrop with a clean gray color scale (zinc).",
+      "High-fidelity indigo/violet accents (used selectively at ≤10% visual area).",
+      "Flat surface containers defined by precise 1px borders and alpha-blended transparency.",
+      "Technical typography (Geist Sans) coupled with monospace metadata (Geist Mono)."
+    ],
+    "rules": [
+      {
+        "name": "The 10% Accent Rule",
+        "body": "The vibrant indigo/violet accent colors must only occupy ≤10% of any given screen's total visual area. Their impact comes from rarity, drawing the eye directly to action points.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Surfaces remain flat and unshaded at rest. Drop shadows are forbidden except on active overlays (such as modals or absolute dropdowns) which use a heavy ambient dark shadow to isolate them from underlying text.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do stick to a maximum 75ch line length limit on article content to optimize readability.",
+      "Do use Geist Mono for code snippets, IDs, connection states, and email addresses.",
+      "Do respect system-level preferences by disabling slide/fade animations if prefers-reduced-motion is active."
+    ],
+    "donts": [
+      "Don't use colored side-stripe borders (e.g. border-left-4) as accents on list items or cards.",
+      "Don't use gradient text combinations under dark modes; use clean white or solid light gray text instead.",
+      "Don't use generic, unstyled cards. Always include the explicit 1px zinc-850 border and translucent background."
+    ]
+  }
+}
