@@ -1,16 +1,25 @@
-import Link from "next/link";
+import React from 'react';
+import { api, Post } from '../lib/api';
+import HomeClient from './HomeClient';
 
-export default function Home() {
+export default async function Home() {
+  let initialPosts: Post[] = [];
+  let initialApiConnected = false;
+  let initialError: string | null = null;
+
+  try {
+    initialPosts = await api.getFeed();
+    initialApiConnected = true;
+  } catch (err: unknown) {
+    initialError = err instanceof Error ? err.message : 'Failed to connect to the API.';
+    initialApiConnected = false;
+  }
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold">Welcome to Next.js!</h1>
-      <p className="mt-4 text-lg">Base Path: /nextjs-cicd</p>
-      <Link
-        href="/contact"
-        className="mt-8 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-      >
-        View Contacts
-      </Link>
-    </div>
+    <HomeClient
+      initialPosts={initialPosts}
+      initialApiConnected={initialApiConnected}
+      initialError={initialError}
+    />
   );
 }
