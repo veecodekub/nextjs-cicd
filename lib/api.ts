@@ -24,7 +24,13 @@ export interface SignupUserDto {
   email: string;
 }
 
-const API_BASE = '/nextjs-cicd/api/v1';
+const getApiBase = () => {
+  if (typeof window === 'undefined') {
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    return `${backendUrl}/api/v1`;
+  }
+  return '/nextjs-cicd/api/v1';
+};
 
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
@@ -54,7 +60,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
 export const api = {
   // GET /api/v1/feed
   getFeed: async (): Promise<Post[]> => {
-    const res = await fetch(`${API_BASE}/feed`, {
+    const res = await fetch(`${getApiBase()}/feed`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       cache: 'no-store',
@@ -64,7 +70,7 @@ export const api = {
 
   // GET /api/v1/post/{id}
   getPostById: async (id: number): Promise<Post> => {
-    const res = await fetch(`${API_BASE}/post/${id}`, {
+    const res = await fetch(`${getApiBase()}/post/${id}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       cache: 'no-store',
@@ -74,7 +80,7 @@ export const api = {
 
   // DELETE /api/v1/post/{id}
   deletePost: async (id: number): Promise<{ success: boolean }> => {
-    const res = await fetch(`${API_BASE}/post/${id}`, {
+    const res = await fetch(`${getApiBase()}/post/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -83,7 +89,7 @@ export const api = {
 
   // GET /api/v1/filtered-posts/{searchString}
   searchPosts: async (searchString: string): Promise<Post[]> => {
-    const res = await fetch(`${API_BASE}/filtered-posts/${encodeURIComponent(searchString)}`, {
+    const res = await fetch(`${getApiBase()}/filtered-posts/${encodeURIComponent(searchString)}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       cache: 'no-store',
@@ -93,7 +99,7 @@ export const api = {
 
   // POST /api/v1/post
   createDraft: async (dto: CreateDraftDto): Promise<Post> => {
-    const res = await fetch(`${API_BASE}/post`, {
+    const res = await fetch(`${getApiBase()}/post`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dto),
@@ -103,7 +109,7 @@ export const api = {
 
   // POST /api/v1/user
   signupUser: async (dto: SignupUserDto): Promise<User> => {
-    const res = await fetch(`${API_BASE}/user`, {
+    const res = await fetch(`${getApiBase()}/user`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dto),
@@ -113,7 +119,7 @@ export const api = {
 
   // PUT /api/v1/publish/{id}
   publishPost: async (id: number): Promise<Post> => {
-    const res = await fetch(`${API_BASE}/publish/${id}`, {
+    const res = await fetch(`${getApiBase()}/publish/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
     });

@@ -1,5 +1,3 @@
-'use client';
-
 interface Contact {
   id: number;
   name: string;

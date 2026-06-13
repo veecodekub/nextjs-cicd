@@ -44,9 +44,8 @@ vi.mock("../../lib/api", () => {
 
 describe("Home Page", () => {
   it("renders the welcome heading", async () => {
-    await act(async () => {
-      render(<Home />);
-    });
+    const ResolvedHome = await Home();
+    render(ResolvedHome);
     const heading = screen.getByRole("heading", {
       name: /NestPost Hub/i,
     });
@@ -54,17 +53,15 @@ describe("Home Page", () => {
   });
 
   it("renders the description text", async () => {
-    await act(async () => {
-      render(<Home />);
-    });
+    const ResolvedHome = await Home();
+    render(ResolvedHome);
     const description = screen.getByText("basePath: /nextjs-cicd");
     expect(description).toBeInTheDocument();
   });
 
   it("renders the sign up and new draft buttons", async () => {
-    await act(async () => {
-      render(<Home />);
-    });
+    const ResolvedHome = await Home();
+    render(ResolvedHome);
     const signupBtn = screen.getByRole("button", { name: /Sign Up User/i });
     const draftBtn = screen.getByRole("button", { name: /New Draft/i });
     expect(signupBtn).toBeInTheDocument();
@@ -72,9 +69,8 @@ describe("Home Page", () => {
   });
 
   it("renders the mock posts", async () => {
-    await act(async () => {
-      render(<Home />);
-    });
+    const ResolvedHome = await Home();
+    render(ResolvedHome);
     const post1 = await screen.findByText("Test Post 1");
     const post2 = await screen.findByText("Test Post 2");
     expect(post1).toBeInTheDocument();
