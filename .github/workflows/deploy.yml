@@ -83,6 +83,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -97,6 +99,7 @@ jobs:
       - name: Set environment variables
         run: |
           BRANCH_NAME="${{ github.ref_name }}"
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> $GITHUB_ENV
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "CONTAINER_NAME=nextjs-prod" >> $GITHUB_ENV
             echo "PORT=3000" >> $GITHUB_ENV
@@ -116,7 +119,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
-          envs: CONTAINER_NAME,PORT,ENV_NAME,REGISTRY,IMAGE_NAME,IMAGE_TAG
+          envs: CONTAINER_NAME,PORT,ENV_NAME,REGISTRY,IMAGE_NAME,IMAGE_TAG,NEXT_PUBLIC_API_URL
           script: |
             set -e
             IMAGE_FULL_NAME="$REGISTRY/$IMAGE_NAME"
@@ -134,6 +137,7 @@ jobs:
               --name "$CONTAINER_NAME" \
               --restart unless-stopped \
               -p "$PORT:3000" \
+              -e NEXT_PUBLIC_API_URL="$NEXT_PUBLIC_API_URL" \
               "$IMAGE_FULL_NAME:$IMAGE_TAG"
 
             echo "Deployment to $ENV_NAME complete!"
