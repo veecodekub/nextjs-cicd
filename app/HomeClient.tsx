@@ -336,7 +336,7 @@ export default function HomeClient({
 
       {/* Footer */}
       <footer className="border-t border-zinc-900 bg-zinc-950/20 py-8 text-center text-xs text-zinc-500">
-        <p>© 2026 NestPost Hub. Full-Stack CI/CD Sandbox environment.</p>
+        <p>© 2026 NestPost Hub. Full-Stack CI/CD Sandbox environment. Version 0.0.1</p>
       </footer>
 
       {/* Modals */}
