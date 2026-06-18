@@ -1,0 +1,22 @@
+vulnerabilities:
+  - id: CVE-2026-23745
+    expired_at: 2026-07-18
+    statement: "Temporary suppression: Next.js 16.2.9 vendors node-tar 7.5.1 in next/dist/compiled/tar, and next@latest is currently 16.2.9. Remove this after an upstream Next.js release updates the vendored tar package."
+  - id: CVE-2026-23950
+    expired_at: 2026-07-18
+    statement: "Temporary suppression: Next.js 16.2.9 vendors node-tar 7.5.1 in next/dist/compiled/tar, and next@latest is currently 16.2.9. Remove this after an upstream Next.js release updates the vendored tar package."
+  - id: CVE-2026-24842
+    expired_at: 2026-07-18
+    statement: "Temporary suppression: Next.js 16.2.9 vendors node-tar 7.5.1 in next/dist/compiled/tar, and next@latest is currently 16.2.9. Remove this after an upstream Next.js release updates the vendored tar package."
+  - id: CVE-2026-26960
+    expired_at: 2026-07-18
+    statement: "Temporary suppression: Next.js 16.2.9 vendors node-tar 7.5.1 in next/dist/compiled/tar, and next@latest is currently 16.2.9. Remove this after an upstream Next.js release updates the vendored tar package."
+  - id: CVE-2026-29786
+    expired_at: 2026-07-18
+    statement: "Temporary suppression: Next.js 16.2.9 vendors node-tar 7.5.1 in next/dist/compiled/tar, and next@latest is currently 16.2.9. Remove this after an upstream Next.js release updates the vendored tar package."
+  - id: CVE-2026-31802
+    expired_at: 2026-07-18
+    statement: "Temporary suppression: Next.js 16.2.9 vendors node-tar 7.5.1 in next/dist/compiled/tar, and next@latest is currently 16.2.9. Remove this after an upstream Next.js release updates the vendored tar package."
+  - id: CVE-2026-33671
+    expired_at: 2026-07-18
+    statement: "Temporary suppression: Next.js 16.2.9 vendors picomatch 4.0.3 in next/dist/compiled/picomatch, and next@latest is currently 16.2.9. Remove this after an upstream Next.js release updates the vendored package."

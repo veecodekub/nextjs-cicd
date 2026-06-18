@@ -57,8 +57,6 @@ ENV NODE_ENV=production
 # This caches the .next/cache directory across builds, but it also prevents
 # .next/cache/fetch-cache from being included in the final image, meaning
 # cached fetch responses from the build won't be available at runtime.
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 RUN if [ -f package-lock.json ]; then \
     npm run build; \
@@ -79,12 +77,18 @@ FROM node:${NODE_VERSION} AS runner
 # Set working directory
 WORKDIR /app
 
+# Keep the runtime image patched and remove package managers that are not needed
+# to run the standalone Next.js server.
+RUN apt-get update \
+  && apt-get upgrade -y \
+  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx \
+  && rm -rf /usr/local/lib/node_modules/corepack /usr/local/bin/corepack
+
 # Set production environment variables
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry

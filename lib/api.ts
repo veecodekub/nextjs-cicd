@@ -26,7 +26,7 @@ export interface SignupUserDto {
 
 const getApiBase = () => {
   if (typeof window === 'undefined') {
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const backendUrl = process.env.API_URL || 'http://localhost:3000';
     return `${backendUrl}/api/v1`;
   }
   return '/nextjs-cicd/api/v1';

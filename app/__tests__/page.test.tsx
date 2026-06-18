@@ -1,4 +1,4 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import Home from "../page";
 
@@ -77,4 +77,3 @@ describe("Home Page", () => {
     expect(post2).toBeInTheDocument();
   });
 });
-
