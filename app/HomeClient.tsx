@@ -30,7 +30,18 @@ export default function HomeClient({
   // Modals & User Registry
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [recentEmails, setRecentEmails] = useState<string[]>([]);
+  const [recentEmails, setRecentEmails] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return [];
+
+    const saved = localStorage.getItem('registered_emails');
+    if (!saved) return [];
+
+    try {
+      return JSON.parse(saved);
+    } catch {
+      return [];
+    }
+  });
   
   // Connection check
   const [isApiConnected, setIsApiConnected] = useState<boolean | null>(initialApiConnected);
@@ -72,18 +83,6 @@ export default function HomeClient({
       setError(msg);
     } finally {
       setLoading(false);
-    }
-  }, []);
-
-  // Load Registry from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('registered_emails');
-    if (saved) {
-      try {
-        setRecentEmails(JSON.parse(saved));
-      } catch {
-        setRecentEmails([]);
-      }
     }
   }, []);
 
