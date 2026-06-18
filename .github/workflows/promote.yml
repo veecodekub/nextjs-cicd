@@ -31,6 +31,7 @@ jobs:
         with:
           repository: veecodekub/veecodekub-infra
           token: ${{ secrets.INFRA_REPO_PAT }}
+          persist-credentials: false
 
       - name: Update NextJS image digest
         env:
