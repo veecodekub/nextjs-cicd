@@ -77,6 +77,14 @@ FROM node:${NODE_VERSION} AS runner
 # Set working directory
 WORKDIR /app
 
+# Keep the runtime image patched and remove package managers that are not needed
+# to run the standalone Next.js server.
+RUN apt-get update \
+  && apt-get upgrade -y \
+  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx \
+  && rm -rf /usr/local/lib/node_modules/corepack /usr/local/bin/corepack
+
 # Set production environment variables
 ENV NODE_ENV=production
 ENV PORT=3000
