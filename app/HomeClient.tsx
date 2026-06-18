@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { api, Post } from '../lib/api';
 import PostCard from '../components/PostCard';
@@ -198,6 +199,12 @@ export default function HomeClient({
             >
               Sign Up User
             </button>
+            <Link
+              href="/hello"
+              className="rounded-lg border border-zinc-850 bg-zinc-900/30 px-4 py-1.5 text-xs font-semibold text-zinc-300 transition-all hover:border-zinc-700 hover:bg-zinc-900/80 hover:text-white"
+            >
+              Hello
+            </Link>
             <button
               onClick={() => setIsCreateOpen(true)}
               className="rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 px-4 py-1.5 text-xs font-semibold text-white shadow-md shadow-indigo-600/15 transition-all cursor-pointer"
