@@ -48,6 +48,15 @@ export default function HelloNameForm() {
             {displayName ? `Hello, ${displayName}!` : 'Hello!'}
           </p>
         </div>
+
+        <div className="rounded-lg border border-emerald-900/60 bg-emerald-950/20 p-4">
+          <p className="text-xs font-medium uppercase tracking-[0.14em] text-emerald-300">
+            CI/CD release note
+          </p>
+          <p className="mt-2 text-sm leading-6 text-emerald-50/90">
+            This page is ready for the GitOps promotion flow.
+          </p>
+        </div>
       </form>
     </section>
   );

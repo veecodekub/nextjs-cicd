@@ -12,4 +12,13 @@ describe('Hello Page', () => {
     expect(screen.getByRole('heading', { name: /hello, vee/i })).toBeInTheDocument();
     expect(screen.getByText('Hello, Vee!')).toBeInTheDocument();
   });
+
+  it('renders the CI/CD release note', () => {
+    render(<HelloPage />);
+
+    expect(screen.getByText('CI/CD release note')).toBeInTheDocument();
+    expect(
+      screen.getByText('This page is ready for the GitOps promotion flow.'),
+    ).toBeInTheDocument();
+  });
 });
