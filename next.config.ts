@@ -1,12 +1,17 @@
 import type { NextConfig } from "next";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-// ดึงค่าจาก ENV หรือ fallback ไปที่ localhost:3000 หากไม่ได้ตั้งค่าไว้
-const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-console.log("backendUrl", backendUrl);
+// Runtime-only backend URL. Keep this out of NEXT_PUBLIC_* so the image can be promoted unchanged.
+const backendUrl = process.env.API_URL || "http://localhost:3000";
+const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   output: "standalone",
   basePath: "/nextjs-cicd",
+  turbopack: {
+    root: projectRoot,
+  },
   async rewrites() {
     return [
       {
